@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using TechJobs6Persistent.Data;
 using TechJobs6Persistent.Models;
 using TechJobs6Persistent.ViewModels;
@@ -65,10 +66,11 @@ namespace TechJobs6Persistent.Controllers
 
         public IActionResult About(int id)
         {
-            
-            List<Employer> employers = new List<Employer>();
-            employers.Find(Employer =>  Employer.Id == id);
-            return View();
+            Employer? theEmployer = context.Employers.Find(id);
+            //List<Employer> employers = new List<Employer>();
+            //employers.Find(Employer =>  Employer.Id == id);
+            return View(theEmployer);
+
         }
 
     }
