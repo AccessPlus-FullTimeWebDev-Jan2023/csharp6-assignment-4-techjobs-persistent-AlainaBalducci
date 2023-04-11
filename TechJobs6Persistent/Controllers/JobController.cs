@@ -44,13 +44,24 @@ namespace TechJobs6Persistent.Controllers
         [HttpPost]
         public IActionResult Add(AddJobViewModel addJobViewModel)
         {
-            //if(ModelState.IsValid)
-            //{
-            //    Job theJob = context.Jobs.Find(addJobViewModel.EmployerId);
-            //    Employer theEmployer = 
+           if(ModelState.IsValid)
+            {
+                Employer theEmployer = context.Employers.Find(addJobViewModel.EmployerId);
 
-            //}
-            return View();
+                Job theJob = new Job
+                {
+                    Name = addJobViewModel.Name,
+                    Employer = theEmployer,
+
+                };
+
+                context.Jobs.Add(theJob);
+                context.SaveChanges();
+
+                return Redirect("/Job");
+
+            }
+            return View(addJobViewModel);
         }
 
         public IActionResult Delete()

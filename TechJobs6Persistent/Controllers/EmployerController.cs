@@ -46,6 +46,7 @@ namespace TechJobs6Persistent.Controllers
         }
 
         [HttpPost]
+        
         public IActionResult ProcessCreateEmployerForm(AddEmployerViewModel addEmployerViewModel)
         {
             if (ModelState.IsValid)
@@ -59,7 +60,7 @@ namespace TechJobs6Persistent.Controllers
                 context.Employers.Add(newEmployer);
                 context.SaveChanges();
 
-                return Redirect("Employer");
+                return Redirect("/Employer");
             }
             return View("Create", addEmployerViewModel);
         }

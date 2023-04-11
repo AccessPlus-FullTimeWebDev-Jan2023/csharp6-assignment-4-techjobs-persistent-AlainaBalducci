@@ -13,10 +13,8 @@ namespace TechJobs6Persistent.ViewModels
 
         public List<SelectListItem>? Employers { get; set; }
 
-
-
+        
         public AddJobViewModel() { }
-
 
 
         public AddJobViewModel(List<Employer> employers)
