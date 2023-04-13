@@ -94,6 +94,53 @@ namespace TechJobs6Persistent.Controllers
             return View(jobDetailViewModel);
 
         }
+
+        public IActionResult Search()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Search(string searchTerm, string? searchType)
+        {
+            List<Job> jobs = context.Jobs.Include(j => j.Employer).Include(j => j.Skills).ToList();
+            ViewBag.jobs = new List<Job>();
+            if (searchType == "Employers")
+            {
+                foreach (Job j in jobs)
+                {
+                    if (j.Employer.Name == searchTerm)
+                    {
+                        ViewBag.jobs.Add(j);
+                    }
+                }
+            }
+            else if (searchType == "Location")
+            {
+                foreach (Job j in jobs)
+                {
+                    if (j.Employer.Location == searchTerm)
+                    {
+                        ViewBag.jobs.Add(j);
+                    }
+                }
+            }
+            else if (searchType == "Skills")
+            {
+                foreach (Job j in jobs)
+                {
+                    foreach (Skill skill in j.Skills)
+                    {
+                        if (skill.SkillName == searchTerm)
+                        {
+                            ViewBag.jobs.Add(j);
+                        }
+                    }
+                }
+            }
+            return View();
+        }
     }
 }
 
