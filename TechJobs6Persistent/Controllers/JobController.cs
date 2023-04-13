@@ -96,13 +96,13 @@ namespace TechJobs6Persistent.Controllers
             return View(jobDetailViewModel);
 
         }
-
+        [AllowAnonymous]
         public IActionResult Search()
         {
 
             return View();
         }
-
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Search(string searchTerm, string? searchType)
         {
